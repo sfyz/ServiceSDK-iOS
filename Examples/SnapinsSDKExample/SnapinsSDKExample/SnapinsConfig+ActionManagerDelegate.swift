@@ -17,7 +17,7 @@ extension SnapinsConfig : SCSActionManagerDelegate {
      */
     func actionManager(_ actionManager: SCSActionManager,
                        actionsToShowFor controller: UIViewController?,
-                       withDefaultActions defaultActions: Set<String>) -> Set<String>?
+                       withDefaultActions defaultActions: Set<SCSAction>) -> Set<SCSAction>?
     {
         var mySet = defaultActions
 
@@ -26,7 +26,7 @@ extension SnapinsConfig : SCSActionManagerDelegate {
         // you can inspect `controller` to determine whether you want
         // to add a custom button for a given view controller...)
         if (SnapinsConstants.ENABLE_CUSTOM_ACTION_BUTTONS) {
-            mySet.insert(SnapinsConstants.CUSTOM_ACTION_NAME)
+          mySet.insert(SCSAction.init(SnapinsConstants.CUSTOM_ACTION_NAME))
         }
 
         return mySet
@@ -36,9 +36,9 @@ extension SnapinsConfig : SCSActionManagerDelegate {
      Shows the button for a given action.
      */
     func actionManager(_ actionManager: SCSActionManager,
-                       viewForActionItemWithName name: String) -> UIView?
+                       viewForActionItemWithName name: SCSAction) -> UIView?
     {
-        if name == SnapinsConstants.CUSTOM_ACTION_NAME {
+        if name.rawValue == SnapinsConstants.CUSTOM_ACTION_NAME {
 
             // Create our custom action button
             let customActionButton = SCSActionButton()
@@ -55,7 +55,7 @@ extension SnapinsConfig : SCSActionManagerDelegate {
      Handler for the custom action.
      */
     func myCustomButtonHandler(sender: UIButton!) {
-        SCServiceCloud.sharedInstance().knowledge.setInterfaceVisible(false, animated: true, completion: nil)
+        ServiceCloud.shared().knowledge.setInterfaceVisible(false, animated: true, completion: nil)
 
         let alert = UIAlertController(title: "Custom Action",
                                       message: "Here is where you can provide a custom action!",
