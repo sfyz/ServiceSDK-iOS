@@ -26,7 +26,7 @@ extension SnapinsConfig : SCSActionManagerDelegate {
         // you can inspect `controller` to determine whether you want
         // to add a custom button for a given view controller...)
         if (SnapinsConstants.ENABLE_CUSTOM_ACTION_BUTTONS) {
-          mySet.insert(SCSAction.init(SnapinsConstants.CUSTOM_ACTION_NAME))
+          mySet.insert(.myCustomAction)
         }
 
         return mySet
@@ -38,7 +38,7 @@ extension SnapinsConfig : SCSActionManagerDelegate {
     func actionManager(_ actionManager: SCSActionManager,
                        viewForActionItemWithName name: SCSAction) -> UIView?
     {
-        if name.rawValue == SnapinsConstants.CUSTOM_ACTION_NAME {
+        if name == .myCustomAction {
 
             // Create our custom action button
             let customActionButton = SCSActionButton()

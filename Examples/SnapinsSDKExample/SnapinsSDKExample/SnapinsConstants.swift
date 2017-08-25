@@ -47,8 +47,20 @@ class SnapinsConstants {
   
   // Action Button Config
   // TO DO: These variables are used for the custom
-  //        action button...
+  //        action button... Also see the enum extension
+  //        for SCSAction below...
   static let ENABLE_CUSTOM_ACTION_BUTTONS = true
   static let CUSTOM_ACTION_NAME = "MyCustomAction"
   static let CUSTOM_ACTION_TITLE = "👾"
 }
+
+/**
+ Enum extension to include our new action button.
+ */
+extension SCSAction {
+  // TO DO: Update this custom action name as desired...
+  static var myCustomAction: SCSAction {
+    return SCSAction(rawValue: SnapinsConstants.CUSTOM_ACTION_NAME)
+  }
+}
+
